@@ -1,4 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_skripsi/hasil.dart';
+import 'package:flutter_application_skripsi/unggah.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,141 +38,156 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 5, // Jumlah tab (5 tab)
-      child: Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                "Home Page",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DefaultTabController(
+        length: 4, // Jumlah tab (4 tab)
+        child: Scaffold(
+          body: Column(
+            children: [
+              Container(
+                color: Colors.orange, // Warna latar belakang TabBar
+                child: TabBar(
+                  tabs: [
+                    Tab(
+                      child: Text(
+                        'Beranda',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'Hasil',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'Bantuan',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'Tentang Aplikasi',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: 'Tab 1'),
-              Tab(text: 'Tab 2'),
-              Tab(text: 'Tab 3'),
-              Tab(text: 'Tab 4'),
-              Tab(text: 'Tab 5'),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    Beranda(),
+                    Hasil(),
+                    Bantuan(),
+                    TentangAplikasi(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
-        body: TabBarView(
-          children: [
-            // Konten untuk Tab 1
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Page1()),
-                  );
-                },
-                child: Text('Go to Page 1'),
+      ),
+    );
+  }
+}
+
+class Beranda extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+        child: Center(
+          child: Stack(
+            alignment: Alignment.bottomRight, // Posisi gambar di bawah kanan
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Selamat Datang !',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800,
+                      fontFamily: 'Montserrat',
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Website sistem pendeteksi Deepfake berbasis citra',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UnggahImage()));
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.orange),
+                    child: Text(
+                      'Mulai Deteksi',
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(170, 0, 0, 0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Keterangan : ',
+                          style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(170, 0, 0, 0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Website ini berfungsi membantu seseorang untuk mendeteksi sebuah\n citra gambar yang dicurigai sebagai sebuah gambar asli atau palsu',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ),
-            // Konten untuk Tab 2
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Page2()),
-                  );
-                },
-                child: Text('Go to Page 2'),
-              ),
-            ),
-            // Konten untuk Tab 3
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Page3()),
-                  );
-                },
-                child: Text('Go to Page 3'),
-              ),
-            ),
-            // Konten untuk Tab 4
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Page4()),
-                  );
-                },
-                child: Text('Go to Page 4'),
-              ),
-            ),
-            // Konten untuk Tab 5
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Page5()),
-                  );
-                },
-                child: Text('Go to Page 5'),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ),
       ),
     );
   }
 }
 
-class Page1 extends StatelessWidget {
+class Bantuan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Page 1'),
-      ),
-      body: Center(
-        child: Text('This is Page 1'),
-      ),
-    );
-  }
-}
-
-class Page2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Page 2'),
-      ),
-      body: Center(
-        child: Text('This is Page 2'),
-      ),
-    );
-  }
-}
-
-class Page3 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Page 3'),
-      ),
       body: Center(
         child: Text('This is Page 3'),
       ),
@@ -176,29 +195,12 @@ class Page3 extends StatelessWidget {
   }
 }
 
-class Page4 extends StatelessWidget {
+class TentangAplikasi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Page 4'),
-      ),
       body: Center(
         child: Text('This is Page 4'),
-      ),
-    );
-  }
-}
-
-class Page5 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Page 5'),
-      ),
-      body: Center(
-        child: Text('This is Page 5'),
       ),
     );
   }
