@@ -23,31 +23,137 @@ class _HasilState extends State<Hasil> {
               Text(
                 'Hasil Scanning',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                textAlign: TextAlign
+                    .center, // Tambahkan properti ini untuk membuat teks berada di tengah
               ),
               SizedBox(height: 20),
               Container(
-                color: Colors.white,
-                child: DataTable(columns: [
-                  DataColumn(label: Text('Kolom 1')),
-                  DataColumn(label: Text('Kolom 2')),
-                  DataColumn(label: Text('Kolom 3')),
-                  DataColumn(label: Text('Kolom 4')),
-                ], rows: [
-                  DataRow(
-                    cells: [
-                      DataCell(Text('Data 1')),
-                      DataCell(Text('Data 2')),
-                      DataCell(Text('Data 3')),
-                      DataCell(Text('Data 4')),
-                    ],
-                  ),
-                  DataRow(cells: [
-                    DataCell(Text('Data 5')),
-                    DataCell(Text('Data 6')),
-                    DataCell(Text('Data 7')),
-                    DataCell(Text('Data 8')),
-                  ]),
-                ]),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: DataTable(
+                  columnSpacing: 20.0,
+                  dataRowHeight: 50.0,
+                  headingRowHeight: 60.0,
+                  columns: [
+                    DataColumn(
+                      label: Container(
+                        child: Center(
+                          child: Text(
+                            'Metode',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold, // Tambahkan bold
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Container(
+                        child: Center(
+                          child: Text(
+                            'Hasil',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Container(
+                        child: Center(
+                          child: Text(
+                            'Tingkat Akurasi',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Container(
+                        child: Center(
+                          child: Text(
+                            'Waktu',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                  rows: [
+                    DataRow(
+                      cells: [
+                        DataCell(
+                          Text('Autoencoder',
+                              style: TextStyle(
+                                  fontWeight:
+                                      FontWeight.bold)), // Tambahkan bold
+                        ),
+                        DataCell(
+                          Text('Real',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        DataCell(
+                          Text('70%',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        DataCell(
+                          Text('9 Detik',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                      ],
+                      color: MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.selected)) {
+                            return Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.08);
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    DataRow(
+                      cells: [
+                        DataCell(
+                          Text('Generative Adversarial Network',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        DataCell(
+                          Text('Real',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        DataCell(
+                          Text('70%',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        DataCell(
+                          Text('6 Detik',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                      ],
+                      color: MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.selected)) {
+                            return Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.08);
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               )
             ],
           ),

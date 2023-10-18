@@ -2,6 +2,8 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_skripsi/hasil.dart';
+import 'package:flutter_application_skripsi/tentangAplikasi.dart';
+import 'package:flutter_application_skripsi/tutorial.dart';
 import 'package:flutter_application_skripsi/unggah.dart';
 
 void main() {
@@ -81,8 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     Beranda(),
                     Hasil(),
-                    Bantuan(),
-                    TentangAplikasi(),
+                    Tutorial(),
+                    Tentang(),
                   ],
                 ),
               ),
@@ -100,6 +102,11 @@ class Beranda extends StatelessWidget {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage('assets/images/Beranda.png'),
+          fit: BoxFit.none,
+        )),
         child: Center(
           child: Stack(
             alignment: Alignment.bottomRight, // Posisi gambar di bawah kanan
@@ -120,6 +127,7 @@ class Beranda extends StatelessWidget {
                   Text(
                     'Website sistem pendeteksi Deepfake berbasis citra',
                     style: TextStyle(
+                      fontSize: 17,
                       fontFamily: 'Montserrat',
                       color: Colors.black,
                     ),
@@ -143,13 +151,14 @@ class Beranda extends StatelessWidget {
                   ),
                   SizedBox(height: 30),
                   Container(
-                    padding: EdgeInsets.fromLTRB(170, 0, 0, 0),
+                    padding: EdgeInsets.fromLTRB(170, 50, 0, 0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Keterangan : ',
                           style: TextStyle(
+                              fontSize: 20,
                               fontFamily: 'Montserrat',
                               color: Colors.black,
                               fontWeight: FontWeight.bold),
@@ -167,6 +176,7 @@ class Beranda extends StatelessWidget {
                         Text(
                           'Website ini berfungsi membantu seseorang untuk mendeteksi sebuah\n citra gambar yang dicurigai sebagai sebuah gambar asli atau palsu',
                           style: TextStyle(
+                            fontSize: 15,
                             fontFamily: 'Montserrat',
                             color: Colors.black,
                           ),
@@ -179,28 +189,6 @@ class Beranda extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class Bantuan extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('This is Page 3'),
-      ),
-    );
-  }
-}
-
-class TentangAplikasi extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('This is Page 4'),
       ),
     );
   }
