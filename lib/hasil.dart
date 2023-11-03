@@ -3,7 +3,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class Hasil extends StatefulWidget {
-  const Hasil({super.key});
+  List<Map<String,dynamic>> results;
+  Hasil({super.key, required this.results});
 
   @override
   State<Hasil> createState() => _HasilState();

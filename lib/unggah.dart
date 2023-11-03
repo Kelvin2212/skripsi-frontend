@@ -1,9 +1,14 @@
 import 'dart:typed_data'; // Untuk Uint8List
+// import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_skripsi/utils/api.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class UnggahImage extends StatefulWidget {
-  const UnggahImage({Key? key}) : super(key: key);
+  Function onResultChange;
+  UnggahImage({Key? key, required this.onResultChange}) : super(key: key);
 
   @override
   _UnggahImageState createState() => _UnggahImageState();
@@ -11,7 +16,9 @@ class UnggahImage extends StatefulWidget {
 
 class _UnggahImageState extends State<UnggahImage> {
   Uint8List? _image;
+  String? result;
   bool _imageDeleted = false;
+  FormData? _body;
 
   String getFileSize(int bytes) {
     double kb = (bytes / 1024).toDouble();
@@ -22,6 +29,15 @@ class _UnggahImageState extends State<UnggahImage> {
     }
   }
 
+  onUjiClickHandler() async {
+    // ToDo: tinggal di uncomment
+    // post image ke api
+    // Response response = await postImage(_body!);
+
+    // set result disini
+    //  widget.onResultChange(response.data);
+  }
+
   Future<void> selectedImage() async {
     final imgPicker = ImagePicker();
     final XFile? pickedFile =
@@ -29,7 +45,14 @@ class _UnggahImageState extends State<UnggahImage> {
 
     if (pickedFile != null) {
       final imageBytes = await pickedFile.readAsBytes();
+
+      // ubah file ke format FormData sehingga bisa dikirim
+      final formData = FormData.fromMap({
+        "data": MultipartFile.fromBytes(imageBytes, filename: pickedFile.name)
+      });
+
       setState(() {
+        _body = formData;
         _image = imageBytes;
         _imageDeleted = false; // Setel kembali _imageDeleted menjadi false
       });
@@ -112,7 +135,7 @@ class _UnggahImageState extends State<UnggahImage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: (() {}),
+                  onPressed: onUjiClickHandler,
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.orange, // Warna latar belakang
                     primary: Colors.white, // Warna teks
@@ -123,6 +146,8 @@ class _UnggahImageState extends State<UnggahImage> {
                 )
               ],
             ),
+            SizedBox(height: 20),
+            if (result != null) Text(result!),
           ],
         ),
       ),
