@@ -41,6 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> _results = [];
+
+    onResultChange(Map<String, dynamic> response) {
+      _results.add(response);
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
@@ -82,8 +88,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    Beranda(),
-                    Hasil(),
+                    Beranda(onResultChange),
+                    Hasil(results: _results),
                     Tutorial(),
                     Tentang(),
                   ],
@@ -98,6 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Beranda extends StatelessWidget {
+  Function onResultChange;
+  Beranda(this.onResultChange);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +147,8 @@ class Beranda extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => UnggahImage()));
+                              builder: (context) =>
+                                  UnggahImage(onResultChange: onResultChange)));
                     },
                     style: ElevatedButton.styleFrom(primary: Colors.orange),
                     child: Text(
