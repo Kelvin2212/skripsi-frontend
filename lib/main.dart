@@ -41,32 +41,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> _results = [];
+    List<List<Map<String, dynamic>>> _results = [];
 
-    onResultChange(Map<String, dynamic> response) {
+    onResultChange(List<Map<String, dynamic>> response) {
       _results.add(response);
     }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        length: 4, // Jumlah tab (4 tab)
+        length: 4,
         child: Scaffold(
           body: Column(
             children: [
               Container(
-                color: Colors.orange, // Warna latar belakang TabBar
+                color: Colors.orange,
                 child: TabBar(
                   tabs: [
                     Tab(
                       child: Text(
                         'Beranda',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        'Hasil',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -89,7 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: TabBarView(
                   children: [
                     Beranda(onResultChange),
-                    Hasil(results: _results),
                     Tutorial(),
                     Tentang(),
                   ],
@@ -118,7 +111,7 @@ class Beranda extends StatelessWidget {
         )),
         child: Center(
           child: Stack(
-            alignment: Alignment.bottomRight, // Posisi gambar di bawah kanan
+            alignment: Alignment.bottomRight,
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,

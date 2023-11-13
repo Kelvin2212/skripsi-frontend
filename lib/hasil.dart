@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class Hasil extends StatefulWidget {
-  List<Map<String,dynamic>> results;
+  List<List<Map<String, dynamic>>> results;
   Hasil({super.key, required this.results});
 
   @override
@@ -14,6 +14,17 @@ class _HasilState extends State<Hasil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.orange,
+        title: Center(
+          child: Text(
+            'Hasil Pendeteksi Deepfake',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -24,14 +35,13 @@ class _HasilState extends State<Hasil> {
               Text(
                 'Hasil Scanning',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                textAlign: TextAlign
-                    .center, // Tambahkan properti ini untuk membuat teks berada di tengah
+                textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: DataTable(
@@ -45,7 +55,7 @@ class _HasilState extends State<Hasil> {
                           child: Text(
                             'Metode',
                             style: TextStyle(
-                              fontWeight: FontWeight.bold, // Tambahkan bold
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -92,21 +102,27 @@ class _HasilState extends State<Hasil> {
                     DataRow(
                       cells: [
                         DataCell(
-                          Text('Autoencoder',
-                              style: TextStyle(
-                                  fontWeight:
-                                      FontWeight.bold)), // Tambahkan bold
-                        ),
-                        DataCell(
-                          Text('Real',
+                          Text(
+                              widget.results[widget.results.length - 1][0]
+                                  ['metode'],
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         DataCell(
-                          Text('70%',
+                          Text(
+                              widget.results[widget.results.length - 1][0]
+                                  ['result'],
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         DataCell(
-                          Text('9 Detik',
+                          Text(
+                              widget.results[widget.results.length - 1][0]
+                                  ['akurasi'],
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        DataCell(
+                          Text(
+                              widget.results[widget.results.length - 1][0]
+                                  ['waktu'],
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ],
@@ -125,33 +141,30 @@ class _HasilState extends State<Hasil> {
                     DataRow(
                       cells: [
                         DataCell(
-                          Text('Generative Adversarial Network',
+                          Text(
+                              widget.results[widget.results.length - 1][1]
+                                  ['metode'],
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         DataCell(
-                          Text('Real',
+                          Text(
+                              widget.results[widget.results.length - 1][1]
+                                  ['result'],
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         DataCell(
-                          Text('70%',
+                          Text(
+                              widget.results[widget.results.length - 1][1]
+                                  ['akurasi'],
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         DataCell(
-                          Text('6 Detik',
+                          Text(
+                              widget.results[widget.results.length - 1][1]
+                                  ['waktu'],
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ],
-                      color: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.selected)) {
-                            return Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.08);
-                          }
-                          return null;
-                        },
-                      ),
                     ),
                   ],
                 ),
